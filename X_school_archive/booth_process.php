@@ -1,11 +1,7 @@
 <?php	 	 		 		 	 	 		 		 		 		 		 	
 include('config/connect.php');
-	
-	$available = 15;
-	
-	$query = "SELECT * FROM gp_reg_booth";
-	$result = mysql_query($query);
-	$count = mysql_num_rows($result);
+
+$school = $_GET['school'];
 	
 		
 		$team = $_GET['team_name'];
@@ -24,11 +20,11 @@ include('config/connect.php');
 		
 		$timestamp = date('Y-m-d h:i:s');
 		
-		$insert = "INSERT INTO gp_reg_booth VALUES ('', '".$timestamp."', '".$team."', '".$team1."', '".$team1_email."', '".$team1_phone."', '".$team2."', '".$team2_email."', '".$team3."', '".$team3_email."', '".$team4."', '".$team4_email."')";
+		$insert = "INSERT INTO `".$database."`.`Registrations` VALUES ('', '".$timestamp."', '".$team."', '".$team1."', '".$team1_email."', '".$team1_phone."', '".$team2."', '".$team2_email."', '".$team3."', '".$team3_email."', '".$team4."', '".$team4_email."')";
 		
 		mysql_query($insert);
 		
-		$to      = 'jokeef01@atkearney.com';
+		$to      = 'prsolans@gmail.com';
 $subject = 'Global Prize Registration';
 $message = '<html><h2>Registration Form: Booth 2012</h2><br/>';
 

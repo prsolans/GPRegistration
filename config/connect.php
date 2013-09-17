@@ -3,8 +3,9 @@
 	$host = "egv-vmjmladb01";
 	$user = "root";
 	$pass = "splhcb!@11";
-	$database = "eventreg";
-	$baseurl = "http://www.atkearney.com.mx/registration"
+	$database = "globalprize";
+	$baseurl = "http://www.atkearney.com.mx/globalprize";
+	$sitename = "Global Prize Registration";
 */
 
 /* LOCAL SERVER VARIABLE */
@@ -13,6 +14,7 @@
 	$pass = "root";
 	$database = "globalprize";
 	$baseurl = "http://localhost:8888/globalprize";
+	$sitename = "Global Prize Registration";
 
     $con=mysql_connect($host,$user,$pass);
 	if ($con)
@@ -23,4 +25,7 @@
 	{
 		echo("Connection failed!");
 	}
+
+	$today = date('Y-m-d h:i:s');
+
 ?>

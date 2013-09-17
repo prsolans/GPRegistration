@@ -1,5 +1,7 @@
 <?php	 	
 include('config/connect.php');
+include('views/header.php'); 
+
   
 echo "<h1>Global Prize Registration Times</h1>";
 
@@ -78,11 +80,13 @@ echo "</h3>";
 
   
 // display main school info
-$schoolQuery = 'SELECT * FROM `'.$database.'`.`gpr_schools` ORDER BY reg_open DESC';
+$schoolQuery = 'SELECT * FROM `'.$database.'`.`Schools` ORDER BY reg_open DESC';
 $schoolResult = mysql_query($schoolQuery);
 
+echo "<div class='row'>";
+
 while($schoolRow = mysql_fetch_array($schoolResult)){
-	echo "<div style='width: 300px; height: 320px; font-size: 12px; border: 2px solid black; margin: 15px; padding: 15px; float: left;'><h2>" .$schoolRow['school']. "</h2>";	
+	echo "<div class='span4'><h4>" .$schoolRow['name']. "</h4>";	
 	echo "School time zone (relative to current US Central Time): +";
 	echo $schoolRow['time_offset'];
 	echo "<p>Registration is set to open at:<br/>".$schoolRow['reg_open']."</p>";
@@ -113,6 +117,7 @@ while($schoolRow = mysql_fetch_array($schoolResult)){
 			
 			echo "</div></div>";
 }
+echo "</div>";
 
 ?>
 
