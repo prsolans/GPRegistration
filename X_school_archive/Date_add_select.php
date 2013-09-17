@@ -1,10 +1,6 @@
 <?php	 	
 
-$con = mysql_connect("localhost","root","Joomla");
-if (!$con)
-  {
-  die('Could not connect: ' . mysql_error());
-  }
+include('config/connect.php');
 
 	// Retrieve data from Query String
 $thisSchool = $_GET['school'];
@@ -17,7 +13,7 @@ $newDate = mysql_real_escape_string($newDate);
 $selectedDate = mysql_real_escape_string($selectedDate);
 
 	// display main school info
-$schoolQuery = 'SELECT * FROM `joomla`.`x_rec_schools` WHERE schoolID = ' .$thisSchool .';';
+$schoolQuery = 'SELECT * FROM `'.$database.'`.`x_rec_schools` WHERE schoolID = ' .$thisSchool .';';
 $schoolResult = mysql_query($schoolQuery);
 
 
@@ -30,7 +26,7 @@ while($schoolRow = mysql_fetch_array($schoolResult)){
 if ($newDate != ""){
 		
 		//insert new date into the database
-	$datesQuery = 'INSERT INTO  `joomla`.`x_rec_chatdates` (slot_date, schoolID) VALUES ("' .$newDate. '", ' .$thisSchool. ');';
+	$datesQuery = 'INSERT INTO  `'.$database.'`.`x_rec_chatdates` (slot_date, schoolID) VALUES ("' .$newDate. '", ' .$thisSchool. ');';
 	mysql_query($datesQuery);
 	
 	$thisDate = $newDate;
@@ -46,7 +42,7 @@ else {
 			//display scheduled date
 echo "<h3>Currently selected dated:</h3>";
 
-$datesDisplay = 'SELECT * FROM `joomla`.`x_rec_chatdates` WHERE schoolID = ' .$thisSchool .' AND id = ' .$thisDate.';';
+$datesDisplay = 'SELECT * FROM `'.$database.'`.`x_rec_chatdates` WHERE schoolID = ' .$thisSchool .' AND id = ' .$thisDate.';';
 
 $datesResult = mysql_query($datesDisplay);
 
@@ -62,7 +58,7 @@ echo "<p><a href='http://www.atkearney.com/images/test/coffee_chat_admin.php?sch
 echo "<h3>Select from the available time slots, and include the appropriate number of individuals who can submit for that time slot.</h3>";
 
 
-$timeQuery = 'SELECT * FROM `joomla`.`x_rec_timeslots_twenty`;';
+$timeQuery = 'SELECT * FROM `'.$database.'`.`x_rec_timeslots_twenty`;';
 $timeResult = mysql_query($timeQuery);
 
 	// create the form

@@ -1,18 +1,5 @@
 <?php	 	 		 		 	 	 		 		 		 		 		 	
-	$host = "egv-vmjmladb01";
-	$user = "root";
-	$pass = "splhcb!@11";
-	$database = "__global";
-	
-    $con=mysql_connect($host,$user,$pass);
-	if ($con)
-	{
-		mysql_select_db($database);
-	}
-	else
-	{
-		echo("Connection failed!");
-	}
+include('config/connect.php');
 ?>
 <style type="text/css">
 body, table {

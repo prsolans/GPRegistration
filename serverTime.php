@@ -1,11 +1,6 @@
 <?php	 	
 
-
-$con = mysql_connect("localhost","root","Joomla");
-if (!$con)
-  {
-  die('Could not connect: ' . mysql_error());
-  }
+include('config/connect.php');
 
 	// Retrieve data from Query String
 $school = $_GET['school'];
@@ -16,7 +11,7 @@ $school mysql_real_escape_string($school);
 $chatDate = mysql_real_escape_string($chatDate);
 
 	//build query
-$datesQuery = 'SELECT * FROM `joomla`.`x_rec_chatdates` WHERE schoolID = ' .$thisSchool .';';
+$datesQuery = 'SELECT * FROM `'.$database.'`.`x_rec_chatdates` WHERE schoolID = ' .$thisSchool .';';
 
 $datesResult = mysql_query($datesQuery);
 

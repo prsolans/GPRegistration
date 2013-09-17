@@ -1,10 +1,7 @@
 <?php	 	
 
-$con = mysql_connect("localhost","root","Joomla");
-if (!$con)
-  {
-  die('Could not connect: ' . mysql_error());
-  }
+include('config/connect.php');
+
 
 	// Retrieve data from Query String
 $thisSchool = $_GET['school'];

@@ -1,10 +1,5 @@
 <?php	 	
-
-$con = mysql_connect("egv-vmjmladb01","root","splhcb!@11");
-if (!$con)
-  {
-  die('Could not connect: ' . mysql_error());
-  }
+include('config/connect.php');
   
 echo "<h1>Global Prize Registration Times</h1>";
 
@@ -83,7 +78,7 @@ echo "</h3>";
 
   
 // display main school info
-$schoolQuery = 'SELECT * FROM `__global`.`gpr_schools` ORDER BY reg_open DESC';
+$schoolQuery = 'SELECT * FROM `'.$database.'`.`gpr_schools` ORDER BY reg_open DESC';
 $schoolResult = mysql_query($schoolQuery);
 
 while($schoolRow = mysql_fetch_array($schoolResult)){

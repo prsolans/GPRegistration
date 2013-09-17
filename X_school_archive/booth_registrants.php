@@ -1,13 +1,9 @@
 <?php	 	
 
-$con = mysql_connect("egv-vmjmladb01","root","splhcb!@11");
-if (!$con)
-  {
-  die('Could not connect: ' . mysql_error());
-  }
+include('config/connect.php');
 
 	// display main school info
-$schoolQuery = 'SELECT * FROM `__global`.`gp_reg_booth`';
+$schoolQuery = 'SELECT * FROM `'.$database.'`.`gp_reg_booth`';
 $teamResult = mysql_query($schoolQuery);
 
 echo "<table border=1><tr><th>Team Name</th><th>Team Captain</th><th>Captain Email</th><th>Captain Phone</th><th>Member #2</th><th>Member #2 email</th><th>Member #3</th><th>Member #3 email</th><th>Member #4</th><th>Member #4 email</th><th>Time of submission</th></tr>";

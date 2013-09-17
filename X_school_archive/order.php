@@ -6,11 +6,7 @@
 <body>
 <?php	 	
 
-$con = mysql_connect("localhost","root","Joomla");
-if (!$con)
-  {
-  die('Could not connect: ' . mysql_error());
-  }
+include('config/connect.php');
 ?>
 
 <div style='float: left; width: 300px; height: 400px; overflow: auto; border: 3px solid black; background: yellow;'>
@@ -21,7 +17,7 @@ if (!$con)
 $thisSchool = $_GET["schoolChosen"];
 
 	// build query of general school information
-$schoolQuery = 'SELECT * FROM `joomla`.`x_rec_schools` WHERE schoolID = ' .$thisSchool .';';
+$schoolQuery = 'SELECT * FROM `'.$database.'`.`x_rec_schools` WHERE schoolID = ' .$thisSchool .';';
 $schoolResult = mysql_query($schoolQuery);
 
 	// display school info
@@ -30,7 +26,7 @@ while($schoolRow = mysql_fetch_array($schoolResult)){
 }
 
 	// build query of selected schools currently scheduled dates
-$datesQuery = 'SELECT * FROM `joomla`.`x_rec_chatdates` WHERE schoolID = ' .$thisSchool .';';
+$datesQuery = 'SELECT * FROM `'.$database.'`.`x_rec_chatdates` WHERE schoolID = ' .$thisSchool .';';
 $datesResult = mysql_query($datesQuery);
 
 echo "<p>Choose from currently scheduled dates, or add a new date to the schedule.</p><p>Current Dates:<br/>";
@@ -52,7 +48,7 @@ echo "</select>";
 
 <div style='width: 300px; height: 400px; overflow: auto; border: 3px solid black; background: green;'>
 <?php	 	
-$timeQuery = 'SELECT * FROM `joomla`.`booth_slots`;';
+$timeQuery = 'SELECT * FROM `'.$datebase.'`.`booth_slots`;';
 
 $timeResult = mysql_query($timeQuery);
 

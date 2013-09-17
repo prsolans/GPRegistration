@@ -2,16 +2,12 @@
 
 $schoolid = $_GET[x];
 
-$con = mysql_connect("egv-vmjmladb01","root","splhcb!@11");
-if (!$con)
-  {
-  die('Could not connect: ' . mysql_error());
-  }
+include('config/connect.php');
 
 $today = date('Y-M-d H:i:s');
   
 // display school info: ID=1 -> Carnegie Mellon
-$schoolQuery = 'SELECT * FROM `__global`.`gpr_schools` WHERE id='.$schoolid.'';
+$schoolQuery = 'SELECT * FROM `'.$database.'`.`gpr_schools` WHERE id='.$schoolid.'';
 $schoolResult = mysql_query($schoolQuery);
 
 while($schoolRow = mysql_fetch_array($schoolResult)){
