@@ -9,6 +9,15 @@ $school = $_GET['school'];
 $schoolQuery = 'SELECT * FROM `'.$database.'`.`Registrations` WHERE school='.$school;
 $teamResult = mysql_query($schoolQuery);
 
+$select = "SELECT name FROM `".$database."`.`Schools` WHERE id=$school";
+$result = mysql_query($select);
+
+while($row = mysql_fetch_array($result)){
+  $name = $row['name'];
+}   
+
+echo "<h3>".$name."</h3>";
+
 echo "<table class='table table-striped'><tr><th>Team Name</th><th>Team Captain</th><th>Captain Email</th><th>Captain Phone</th><th>Member #2</th><th>Member #2 email</th><th>Member #3</th><th>Member #3 email</th><th>Member #4</th><th>Member #4 email</th><th>Time of submission</th></tr>";
 
 while($teamRow = mysql_fetch_array($teamResult)){

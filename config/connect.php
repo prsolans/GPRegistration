@@ -2,7 +2,7 @@
 /* 	ATK SERVER  		 		 	 	 		 		 		 		 		 	
 	$host = "egv-vmjmladb01";
 	$user = "root";
-	$pass = "splhcb!@11";
+	$pass = "";
 	$database = "globalprize";
 	$baseurl = "http://www.atkearney.com.mx/globalprize";
 	$sitename = "Global Prize Registration";

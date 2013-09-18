@@ -21,20 +21,24 @@ while($thisSchool = mysql_fetch_array($schoolResult)){
   $contactname = $thisSchool['contactname'];
   $contactemail = $thisSchool['contactemail'];
   $formurl = $thisSchool['formurl'];
+
+  $open = strtotime($reg_open);
+  $open = date("F d, h:ia", $open);
+
 }
 
   $label='';
-  if($reg_close < $today){
-      $label='<span class="label label-important">Closed</span>';  
-  }
-  elseif($reg_open <= $today && $reg_close > $today){
-      $label='<span class="label label-success">Open</span>';  
-  }
-  else {
+  if($today <= $reg_open){
       $label='<span class="label label-info">Upcoming</span>';  
   }
+  elseif($today >= $reg_close){
+      $label='<span class="label label-important">Closed</span>';  
+  }
+
+  else {
+          $label='<span class="label label-success">Open</span>';  
+  }
 ?>
-<h2><?php echo $name;?></h2>
 
 </div>
 </div>
@@ -42,6 +46,8 @@ while($thisSchool = mysql_fetch_array($schoolResult)){
 
 <div class='row'>
   <div class='span6'>
+    <h2><?php echo $name;?></h2>
+
         <?php 
       if($_GET['alert']){
           echo "<div class='alert alert-success'>Update successful.</div>";
@@ -56,11 +62,54 @@ while($thisSchool = mysql_fetch_array($schoolResult)){
         <tr><td>Form URL</td><td><a target='_blank' href='<?php echo $formurl; ?>'><?php echo $formurl; ?></a></td></tr>
 </table>
 <a class='btn' href='edit_school.php?school=<?php echo $id; ?>'>Edit School Details</a>
-  </div>
-    <div class='span6'>
+<hr/>
 <ul><li><a target='_blank' href='../reg_form.php?school=<?php echo $id; ?>'>See the form</a></li>
   <li><a href='registrants.php?school=<?php echo $id; ?>'>See registrations</a></li>
 </ul>
+  </div>
+    <div class='span6'>
+      <legend>Front-end display</legend>
+      
+      <div class='well'>
+        <script>
+        var todayIs = new Date();
+        var whenOpens = new Date("<?php echo $reg_open; ?>");
+        var whenCloses= new Date("<?php echo $reg_close; ?>");
+
+        if (todayIs <= whenOpens ) //NOT OPEN YET
+        document.write('<b><?php echo $open; ?></b>')
+        else if (todayIs >= whenCloses) //CLOSED
+        document.write('<b>Registration is now closed.</b>')
+        else
+        document.write('<b><a href="<?php echo $formurl; ?>">Click to register</a></b>')
+
+      </script>
+      </div>
+      <style>
+      .script {
+        display: block;
+        margin: 0;
+        padding: 0;
+      }
+      </style>
+      <p>Place the following between <code>&lt;script&gt;&lt;/script&gt;</code> tags in the portlet to present the content shown above.</p>
+      <pre><code>
+        <script class='script' type='text/plain'>
+        var todayIs = new Date();
+        var whenCloses= new Date("<?php echo $reg_close; ?>");
+        var whenOpens = new Date("<?php echo $reg_open; ?>");
+
+        if (todayIs <= whenOpens ) //NOT OPEN YET
+        document.write('<b><?php echo $open; ?></b>')
+        else if (todayIs >= whenCloses) //CLOSED
+        document.write('<b>Registration closed</b>')
+        else
+        document.write('<b><a href="<?php echo $formurl; ?>">Click to register</a></b>')
+        </script>
+      </code></pre>
+
+      </div>
+
   </div>
 </div>
 
