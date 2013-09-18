@@ -14,6 +14,7 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <!-- Obtain Bootstrap javascript from CDN (online service) so it doesn't have to be on my machine -->
 <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
+
 <script src='<?php echo $baseurl; ?>/js/jquery.tablesorter.js'></script>
 <script src='<?php echo $baseurl; ?>/js/jquery.tablesorter.widgets.js'></script>
   <div class='topbar'><h1><?php echo $sitename; ?></h1><p><a href='index.php'>Home</a></p></div>

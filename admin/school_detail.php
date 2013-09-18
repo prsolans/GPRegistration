@@ -4,6 +4,7 @@ include('../config/connect.php');
 include('../views/header.php'); 
 
 ?>
+<script src="../js/moment.js"></script>
 
 <div class='row'>
   <div class='span12'>
@@ -72,9 +73,11 @@ while($thisSchool = mysql_fetch_array($schoolResult)){
       
       <div class='well'>
         <script>
-        var todayIs = new Date();
-        var whenOpens = new Date("<?php echo $reg_open; ?>");
-        var whenCloses= new Date("<?php echo $reg_close; ?>");
+        moment().format();
+
+        var todayIs = moment();
+        var whenOpens = moment("<?php echo $reg_open; ?>");
+        var whenCloses= moment("<?php echo $reg_close; ?>");
 
         if (todayIs <= whenOpens ) //NOT OPEN YET
         document.write('<b><?php echo $open; ?></b>')
@@ -95,16 +98,19 @@ while($thisSchool = mysql_fetch_array($schoolResult)){
       <p>Place the following between <code>&lt;script&gt;&lt;/script&gt;</code> tags in the portlet to present the content shown above.</p>
       <pre><code>
         <script class='script' type='text/plain'>
-        var todayIs = new Date();
-        var whenCloses= new Date("<?php echo $reg_close; ?>");
-        var whenOpens = new Date("<?php echo $reg_open; ?>");
+        moment().format();
+
+        var todayIs = moment();
+        var whenOpens = moment("<?php echo $reg_open; ?>");
+        var whenCloses= moment("<?php echo $reg_close; ?>");
 
         if (todayIs <= whenOpens ) //NOT OPEN YET
         document.write('<b><?php echo $open; ?></b>')
         else if (todayIs >= whenCloses) //CLOSED
-        document.write('<b>Registration closed</b>')
+        document.write('<b>Registration is now closed.</b>')
         else
         document.write('<b><a href="<?php echo $formurl; ?>">Click to register</a></b>')
+
         </script>
       </code></pre>
 
