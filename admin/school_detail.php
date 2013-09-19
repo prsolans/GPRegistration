@@ -5,7 +5,6 @@ include('../views/header.php');
 
 ?>
 <script src="../js/moment.js"></script>
-<script src="../js/moment.timezone.js"></script>
 
 <div class='row'>
   <div class='span12'>
@@ -88,7 +87,7 @@ while($thisSchool = mysql_fetch_array($schoolResult)){
         whenOpens.zone(<?php echo $time_offset?>);
 
         if (todayIs <= whenOpens ) {
-        display.innerHTML = (whenOpens.format('dddd, MMMM D h:mma '));
+        display.innerHTML = (whenOpens.format('D MMMM h:mma '));
         }
         else if ( todayIs > whenCloses) {
           display.innerHTML = "Registration is closed.";
@@ -121,7 +120,7 @@ while($thisSchool = mysql_fetch_array($schoolResult)){
         whenOpens.zone(<?php echo $time_offset?>);
 
         if (todayIs <= whenOpens ) {
-        display.innerHTML = (whenOpens.format('dddd, MMMM D h:mma '));
+        display.innerHTML = (whenOpens.format('D MMMM h:mma '));
         }
         else if ( todayIs > whenCloses) {
           display.innerHTML = "Registration is closed.";
