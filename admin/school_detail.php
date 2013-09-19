@@ -5,6 +5,7 @@ include('../views/header.php');
 
 ?>
 <script src="../js/moment.js"></script>
+<script src="../js/moment.timezone.js"></script>
 
 <div class='row'>
   <div class='span12'>
@@ -19,12 +20,10 @@ while($thisSchool = mysql_fetch_array($schoolResult)){
   $name = $thisSchool['name'];
   $reg_open = $thisSchool['reg_open'];
   $reg_close = $thisSchool['reg_close'];
+  $time_offset = $thisSchool['time_offset'];
   $contactname = $thisSchool['contactname'];
   $contactemail = $thisSchool['contactemail'];
   $formurl = $thisSchool['formurl'];
-
-  $open = strtotime($reg_open);
-  $open = date("F d, h:ia", $open);
 
 }
 
@@ -39,6 +38,8 @@ while($thisSchool = mysql_fetch_array($schoolResult)){
   else {
           $label='<span class="label label-success">Open</span>';  
   }
+
+  $time_offset_display = -($time_offset);
 ?>
 
 </div>
@@ -56,8 +57,9 @@ while($thisSchool = mysql_fetch_array($schoolResult)){
     ?>
     <table class='table'>
         <tr><td>Status</td><td><?php echo $label; ?></td></tr>
-        <tr><td>Registration Opens</td><td><?php echo $reg_open; ?></td></tr>
-        <tr><td>Registration Closes</td><td><?php echo $reg_close; ?></td></tr>
+        <tr><td>Timezone</td><td>UTC/GMT <?php if($time_offset_display > 0) {echo "+";}?><?php echo $time_offset_display; ?> hours<br/>Diff from CST: +<?php echo $time_offset_display+5;?> hours</td></tr>
+        <tr><td>Registration Opens (CST)</td><td><?php echo $reg_open; ?></td></tr>
+        <tr><td>Registration Closes (CST)</td><td><?php echo $reg_close; ?></td></tr>
         <tr><td>Contact Name</td><td><?php echo ucfirst($contactname); ?></td></tr>
         <tr><td>Contact Email</td><td><?php echo $contactemail; ?></td></tr>
         <tr><td>Form URL</td><td><a target='_blank' href='<?php echo $formurl; ?>'><?php echo $formurl; ?></a></td></tr>
@@ -70,22 +72,30 @@ while($thisSchool = mysql_fetch_array($schoolResult)){
   </div>
     <div class='span6'>
       <legend>Front-end display</legend>
-      
-      <div class='well'>
+            <p>What will visitors to the site see?</p>
+
+      <div id='display' class='well'>
+
         <script>
         moment().format();
+
+        var display = document.getElementById('display');
 
         var todayIs = moment();
         var whenOpens = moment("<?php echo $reg_open; ?>");
         var whenCloses= moment("<?php echo $reg_close; ?>");
 
-        if (todayIs <= whenOpens ) //NOT OPEN YET
-        document.write('<b><?php echo $open; ?></b>')
-        else if (todayIs >= whenCloses) //CLOSED
-        document.write('<b>Registration is now closed.</b>')
-        else
-        document.write('<b><a href="<?php echo $formurl; ?>">Click to register</a></b>')
+        whenOpens.zone(<?php echo $time_offset?>);
 
+        if (todayIs <= whenOpens ) {
+        display.innerHTML = (whenOpens.format('dddd, MMMM D h:mma '));
+        }
+        else if ( todayIs > whenCloses) {
+          display.innerHTML = "Registration is closed.";
+        }
+        else {
+          display.innerHTML = "<a href=''>Click to register</a>";
+        }
       </script>
       </div>
       <style>
@@ -95,25 +105,39 @@ while($thisSchool = mysql_fetch_array($schoolResult)){
         padding: 0;
       }
       </style>
-      <p>Place the following between <code>&lt;script&gt;&lt;/script&gt;</code> tags in the portlet to present the content shown above.</p>
+        <legend>Installation steps</legend>
+      <ol><li>Paste the following at the top of the portlet.</p>
       <pre><code>
-        <script class='script' type='text/plain'>
+        &lt;script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.1.0/moment.min.js"&gt;
+         &lt;/script&gt;
+
+      </code></pre></li>
+      <li>Place the following between <code>&lt;script&gt;&lt;/script&gt;</code> tags in the portlet in the appropriate &lt;td&gt; tag.</p>
+      <pre><code>
+   
+         <script class='script' type='text/plain'>
         moment().format();
+
+        var display = document.getElementById('display');
 
         var todayIs = moment();
         var whenOpens = moment("<?php echo $reg_open; ?>");
         var whenCloses= moment("<?php echo $reg_close; ?>");
 
-        if (todayIs <= whenOpens ) //NOT OPEN YET
-        document.write('<b><?php echo $open; ?></b>')
-        else if (todayIs >= whenCloses) //CLOSED
-        document.write('<b>Registration is now closed.</b>')
-        else
-        document.write('<b><a href="<?php echo $formurl; ?>">Click to register</a></b>')
+        whenOpens.zone(<?php echo $time_offset?>);
 
+        if (todayIs <= whenOpens ) {
+        display.innerHTML = (whenOpens.format('dddd, MMMM D h:mma '));
+        }
+        else if ( todayIs > whenCloses) {
+          display.innerHTML = "Registration is closed.";
+        }
+        else {
+          display.innerHTML = "<a href=''>Click to register</a>";
+        }
         </script>
-      </code></pre>
-
+       </code></pre>
+    </li><li>Publish the portlet, and then refresh the page.</li></ol>
       </div>
 
   </div>
