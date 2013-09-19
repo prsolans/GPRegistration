@@ -106,16 +106,10 @@ while($thisSchool = mysql_fetch_array($schoolResult)){
       }
       </style>
         <legend>Installation steps</legend>
-      <ol><li>Paste the following at the top of the portlet.</p>
-      <pre><code>
-        &lt;script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.1.0/moment.min.js"&gt;
-         &lt;/script&gt;
-
-      </code></pre></li>
-      <li>Place the following between <code>&lt;script&gt;&lt;/script&gt;</code> tags in the portlet in the appropriate &lt;td&gt; tag.</p>
-      <pre><code>
-   
-         <script class='script' type='text/plain'>
+      <ol><li>Paste the following at the top of the portlet HTML content.</p>
+      <pre><code>&lt;script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.1.0/moment.min.js"&gt;&lt;/script&gt;</code></pre></li>
+      <li>Paste the following between <code>&lt;script&gt;&lt;/script&gt;</code> tags immediately following the previous step.</p>
+      <pre><code><script class='script' type='text/plain'>
         moment().format();
 
         var display = document.getElementById('display');
@@ -135,9 +129,11 @@ while($thisSchool = mysql_fetch_array($schoolResult)){
         else {
           display.innerHTML = "<a href=''>Click to register</a>";
         }
-        </script>
-       </code></pre>
-    </li><li>Publish the portlet, and then refresh the page.</li></ol>
+        </script></code></pre>
+    </li>
+    <li>Paste this code in the second &lt;td&gt; tag in the "Registration site live" row.
+      <pre><code>&lt;div id='display'&gt;&lt;/div&gt;</code></pre>
+    <li>Publish the portlet, and then refresh the page.</li></ol>
       </div>
 
   </div>
