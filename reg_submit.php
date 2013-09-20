@@ -49,9 +49,9 @@ $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 $headers .= "\r\nBcc: paul.solans@atkearney.com\r\n\r\n";
 
 $status = mail($to, $subject, $message, $headers);
-echo $to;
-echo $headers;
-echo $message;
+//echo $to;
+//echo $headers;
+//echo $message;
 echo "<style type='text/css'>
 body, table {
 font: 12px/1.5 Arial, Helvetica, Verdana, sans-serif;
