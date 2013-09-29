@@ -41,8 +41,8 @@ while($thisSchool = mysql_fetch_array($schoolResult)){
 <table class='table table-striped'>
 <tr><td>Name</td><td><input type='text' name='name' value='<?php echo $name; ?>'>
 </td></tr>
-<tr><td>Registration Opens</td><td><input type='text' name='reg_open' value='<?php echo $reg_open; ?>'></td></tr>
-<tr><td>Registration Closes</td><td><input type='text' name='reg_close' value='<?php echo $reg_close; ?>'></td></tr>
+<tr><td>Registration Opens (Local Time)</td><td><input type='text' name='reg_open' value='<?php echo $reg_open; ?>'></td></tr>
+<tr><td>Registration Closes (Local Time)</td><td><input type='text' name='reg_close' value='<?php echo $reg_close; ?>'></td></tr>
 <tr><td>Contact Name</td><td><input type='text' name='contactname' value='<?php echo $contactname; ?>'></td></tr>
 <tr><td>Contact Email</td><td><input type='text' name='contactemail' value='<?php echo $contactemail; ?>'></td></tr>
 <tr><td>Live URL</td><td><input type='text' name='formurl' value='<?php echo $formurl; ?>'></td></tr>

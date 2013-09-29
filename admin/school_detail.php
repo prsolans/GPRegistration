@@ -57,8 +57,8 @@ while($thisSchool = mysql_fetch_array($schoolResult)){
     <table class='table'>
         <tr><td>Status</td><td><?php echo $label; ?></td></tr>
         <tr><td>Timezone</td><td>UTC/GMT <?php if($time_offset_display > 0) {echo "+";}?><?php echo $time_offset_display; ?> hours<br/>Diff from CST: +<?php echo $time_offset_display+5;?> hours</td></tr>
-        <tr><td>Registration Opens (CST)</td><td><?php echo $reg_open; ?></td></tr>
-        <tr><td>Registration Closes (CST)</td><td><?php echo $reg_close; ?></td></tr>
+        <tr><td>Registration Opens (Local Time)</td><td><?php echo $reg_open; ?></td></tr>
+        <tr><td>Registration Closes (Local Time)</td><td><?php echo $reg_close; ?></td></tr>
         <tr><td>Contact Name</td><td><?php echo ucfirst($contactname); ?></td></tr>
         <tr><td>Contact Email</td><td><?php echo $contactemail; ?></td></tr>
         <tr><td>Form URL</td><td><a target='_blank' href='<?php echo $formurl; ?>'><?php echo $formurl; ?></a></td></tr>
@@ -71,7 +71,7 @@ while($thisSchool = mysql_fetch_array($schoolResult)){
   </div>
     <div class='span6'>
       <legend>Front-end display</legend>
-            <p>What will visitors to the site see?</p>
+            <p>What you will see on the site:</p>
 
       <div id='display' class='well'>
 
@@ -87,7 +87,7 @@ while($thisSchool = mysql_fetch_array($schoolResult)){
         whenOpens.zone(<?php echo $time_offset?>);
 
         if (todayIs <= whenOpens ) {
-        display.innerHTML = (whenOpens.format('D MMMM h:mma '));
+        display.innerHTML = (whenOpens.format('D MMMM h:mma'));
         }
         else if ( todayIs > whenCloses) {
           display.innerHTML = "Registration is closed.";
@@ -97,6 +97,8 @@ while($thisSchool = mysql_fetch_array($schoolResult)){
         }
       </script>
       </div>
+      <em>Note: The time will display in your current timezone.</em>
+
       <style>
       .script {
         display: block;
