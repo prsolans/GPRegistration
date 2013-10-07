@@ -8,7 +8,7 @@ $schoolResult = mysql_query($schoolList);
 
 <div class='row'>
   <span class='span12'>
-<h2>Schools</h2>
+<h2>Schools &nbsp; <a href='edit_school.php?flag=new'><button class='btn btn-primary'>Add new school</button></a></h2>
 <table id='mainTable' class='table table-striped'>
 <thead><tr><th>Status</th><th>School</th><th>Opening</th><th>Closing</th><th>Main Contact</th><th>Actions</th></tr></thead>
 <tbody>
